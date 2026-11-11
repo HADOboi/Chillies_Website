@@ -256,12 +256,6 @@ function Hero() {
       noteMalayY: gsap.quickTo('.hero-note-malay', 'y', { duration: 0.7, ease: 'power2.out' }),
       noteTasteX: gsap.quickTo('.hero-note-taste', 'x', { duration: 0.7, ease: 'power2.out' }),
       noteTasteY: gsap.quickTo('.hero-note-taste', 'y', { duration: 0.7, ease: 'power2.out' }),
-      stampX: gsap.quickTo('.hero-stamp', 'x', { duration: 0.8, ease: 'power2.out' }),
-      stampY: gsap.quickTo('.hero-stamp', 'y', { duration: 0.8, ease: 'power2.out' }),
-      stampR: gsap.quickTo('.hero-stamp', 'rotate', { duration: 0.8, ease: 'power2.out' }),
-      branchX: gsap.quickTo('.hero-botanical-branch', 'x', { duration: 0.8, ease: 'power2.out' }),
-      branchY: gsap.quickTo('.hero-botanical-branch', 'y', { duration: 0.8, ease: 'power2.out' }),
-      branchR: gsap.quickTo('.hero-botanical-branch', 'rotate', { duration: 0.8, ease: 'power2.out' }),
     };
 
     const updateRect = () => {
@@ -293,12 +287,6 @@ function Hero() {
     q.noteMalayY(y * 18);
     q.noteTasteX(x * -20);
     q.noteTasteY(y * 20);
-    q.stampX(x * -16);
-    q.stampY(y * -14);
-    q.stampR(9 + x * 6);
-    q.branchX(x * -14);
-    q.branchY(y * -12);
-    q.branchR(-6 + x * 5);
   };
 
   const handleMouseLeave = () => {
@@ -308,8 +296,6 @@ function Hero() {
     q.brushX(0); q.brushY(0); q.brushR(0);
     q.noteMalayX(0); q.noteMalayY(0);
     q.noteTasteX(0); q.noteTasteY(0);
-    q.stampX(0); q.stampY(0); q.stampR(9);
-    q.branchX(0); q.branchY(0); q.branchR(-6);
   };
 
   return (
@@ -322,15 +308,8 @@ function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <img
-        className="hero-botanical-branch"
-        src={generatedAsset('botanical-branch.webp')}
-        alt=""
-        aria-hidden="true"
-        data-ornament
-      />
       <div className="hero-copy">
-        <p className="eyebrow" data-typewriter>Chillies Restaurant <i>·</i> Est. 2009</p>
+        <p className="eyebrow">Chillies Restaurant <i>·</i> Est. 2009</p>
         <h1 id="hero-title">
           <span className="hero-line"><span>Good</span></span>
           <span className="hero-line"><span>Food <em>Brings</em></span></span>
@@ -356,8 +335,6 @@ function Hero() {
           <img className="hero-spice-doodle" src={generatedAsset('star-anise-outline.png')} alt="" aria-hidden="true" />
         </div>
       </div>
-      <img className="hero-stamp" data-ornament src={referenceAsset('menu-food-stamp-transparent.png')} alt="Good food, good people" />
-      <ul className="hero-side-list"><li><LineIcon name="utensils" /><span>Signature<br />dishes</span></li><li><LineIcon name="leaf" /><span>Fresh<br />ingredients</span></li><li><LineIcon name="users" /><span>Family<br />friendly</span></li><li><LineIcon name="pin" /><span>Multiple<br />locations</span></li></ul>
       <span className="hero-bottom-note">Authentic Kerala flavours · Since 2009</span>
     </section>
   );
@@ -431,12 +408,12 @@ function MenuSection() {
   return (
     <section className="menu-section section-paper" id="menu">
       <div className="menu-pin-runway" ref={runwayRef}><div className="menu-stage">
-        <div className="section-heading menu-heading"><div data-reveal><p className="eyebrow" data-typewriter><i /> Our Menu <i /></p><h2>Flavours<br />for Every Mood<span className="red-dot">.</span></h2><p>From charcoal-grilled classics to comforting rice dishes,<br className="desktop-only" /> explore a menu made for every appetite.</p><Button href={menuPdfUrl} target="_blank" rel="noopener noreferrer">View Full Menu <Arrow /></Button></div><div className="menu-art" data-reveal><div className="hand-note">Real ingredients<br /><strong>Real taste!</strong><svg viewBox="0 0 130 32" aria-hidden="true" data-draw><path d="M3 20c36-18 79-18 120-8m-8 0 10-1-4 10" /></svg></div><img className="menu-stamp" data-ornament src={referenceAsset('menu-food-stamp-transparent.png')} alt="Good food, good people" /></div></div>
-        <div className="menu-carousel menu-train"><button className="carousel-arrow carousel-prev" onClick={() => moveCards(-1)} aria-label="Previous menu categories"><Arrow direction="left" /></button><div className="food-grid" ref={trackRef} onScroll={(event) => { const track = event.currentTarget; if (!track) return; const cardW = track.firstElementChild?.offsetWidth || 240; const index = Math.round(track.scrollLeft / (cardW + 12)); setActiveCard(Math.max(0, Math.min(menuItems.length - 1, index % menuItems.length))); }}>
-          {[0, 1, 2, 3].flatMap((copy) => menuItems.map((item, i) => <a className="food-card" href={menuPdfUrl} target="_blank" rel="noopener noreferrer" key={`${copy}-${item.title}`} data-loop-copy={copy !== 1 ? 'true' : undefined} aria-hidden={copy !== 1} tabIndex={copy !== 1 ? -1 : 0} data-reveal={copy === 1 ? '' : undefined} style={{ '--reveal-order': i }} itemScope itemType="https://schema.org/MenuItem"><meta itemProp="menuAddOn" content={item.category} /><img src={item.source ? officialAsset(item.source) : referenceAsset(item.image)} alt={copy === 1 ? item.alt : ''} loading="lazy" decoding="async" itemProp="image" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = referenceAsset(item.image); }} /><div className="food-info"><h3 itemProp="name">{item.title}</h3><p itemProp="description">{item.description}</p><span className="round-arrow" aria-label={`View ${item.title} menu`}><Arrow /></span></div></a>))}
+        <div className="section-heading menu-heading"><div><p className="eyebrow" data-typewriter><i /> Our Menu <i /></p><h2>Flavours<br />for Every Mood<span className="red-dot">.</span></h2><p>From charcoal-grilled classics to comforting rice dishes,<br className="desktop-only" /> explore a menu made for every appetite.</p><Button href={menuPdfUrl} target="_blank" rel="noopener noreferrer">View Full Menu <Arrow /></Button></div><div className="menu-art"><div className="hand-note">Real ingredients<br /><strong>Real taste!</strong><svg viewBox="0 0 130 32" aria-hidden="true" data-draw><path d="M3 20c36-18 79-18 120-8m-8 0 10-1-4 10" /></svg></div><img className="menu-stamp" data-ornament src={referenceAsset('menu-food-stamp-transparent.png')} alt="Good food, good people" /></div></div>
+        <div className="menu-carousel menu-train" data-reveal><button className="carousel-arrow carousel-prev" onClick={() => moveCards(-1)} aria-label="Previous menu categories"><Arrow direction="left" /></button><div className="food-grid" ref={trackRef} onScroll={(event) => { const track = event.currentTarget; if (!track) return; const cardW = track.firstElementChild?.offsetWidth || 240; const index = Math.round(track.scrollLeft / (cardW + 12)); setActiveCard(Math.max(0, Math.min(menuItems.length - 1, index % menuItems.length))); }}>
+          {[0, 1, 2, 3].flatMap((copy) => menuItems.map((item) => <a className="food-card" href={menuPdfUrl} target="_blank" rel="noopener noreferrer" key={`${copy}-${item.title}`} data-loop-copy={copy !== 1 ? 'true' : undefined} aria-hidden={copy !== 1} tabIndex={copy !== 1 ? -1 : 0} itemScope itemType="https://schema.org/MenuItem"><meta itemProp="menuAddOn" content={item.category} /><img src={item.source ? officialAsset(item.source) : referenceAsset(item.image)} alt={copy === 1 ? item.alt : ''} loading="lazy" decoding="async" itemProp="image" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = referenceAsset(item.image); }} /><div className="food-info"><h3 itemProp="name">{item.title}</h3><p itemProp="description">{item.description}</p><span className="round-arrow" aria-label={`View ${item.title} menu`}><Arrow /></span></div></a>))}
         </div><button className="carousel-arrow carousel-next" onClick={() => moveCards(1)} aria-label="Next menu categories"><Arrow /></button><div className="carousel-dots" aria-label="Menu category pages">{menuItems.map((item, i) => <button key={item.title} className={activeCard === i ? 'active' : ''} aria-label={`Show ${item.title}`} onClick={() => scrollToCard(i)} />)}</div></div>
       </div></div>
-      <div className="signature-band" itemScope itemType="https://schema.org/MenuItem"><meta itemProp="name" content="Malabar Dum Biriyani" /><meta itemProp="description" content="Aromatic rice, tender meat and authentic Malabar spices." /><img data-reveal src={generatedAsset('hero-biryani.webp')} alt="Signature Malabar Dum Biriyani at Chillies Restaurant Wandoor, Kerala" loading="lazy" decoding="async" itemProp="image" /><div data-reveal><p className="eyebrow" data-typewriter>Signature Dish</p><h2>Malabar<br />Dum <em>Biriyani</em></h2><p>A perfect blend of aromatic rice, tender meat<br className="desktop-only" /> and authentic spices — a taste that keeps<br className="desktop-only" /> bringing you back.</p><Button href={menuPdfUrl} target="_blank" rel="noopener noreferrer" variant="light">Explore Biriyani <Arrow /></Button></div><div className="signature-art" aria-hidden="true"><div className="signature-art-group"><img className="signature-art-image botanical-art" src={generatedAsset('botanical-sprig.png')} alt="" /><img className="signature-art-image leaf-art" src={generatedAsset('heart-leaf-outline.png')} alt="" /></div><span>The taste<br /><b>that stays</b></span></div></div>
+      <div className="signature-band" itemScope itemType="https://schema.org/MenuItem"><meta itemProp="name" content="Malabar Dum Biriyani" /><meta itemProp="description" content="Aromatic rice, tender meat and authentic Malabar spices." /><img src={generatedAsset('hero-biryani.webp')} alt="Signature Malabar Dum Biriyani at Chillies Restaurant Wandoor, Kerala" loading="lazy" decoding="async" itemProp="image" /><div><p className="eyebrow" data-typewriter>Signature Dish</p><h2>Malabar<br />Dum <em>Biriyani</em></h2><p>A perfect blend of aromatic rice, tender meat<br className="desktop-only" /> and authentic spices — a taste that keeps<br className="desktop-only" /> bringing you back.</p><Button href={menuPdfUrl} target="_blank" rel="noopener noreferrer" variant="light">Explore Biriyani <Arrow /></Button></div><div className="signature-art" aria-hidden="true"><div className="signature-art-group"><img className="signature-art-image botanical-art" src={generatedAsset('botanical-sprig.png')} alt="" /><img className="signature-art-image leaf-art" src={generatedAsset('heart-leaf-outline.png')} alt="" /></div><span>The taste<br /><b>that stays</b></span></div></div>
     </section>
   );
 }
@@ -446,9 +423,9 @@ function StorySection() {
   const history = [['2009', 'First branch opens in Wandoor, Malappuram'], ['2019', 'Treatley fine dining opens in Wandoor'], ['2020', 'Cloud kitchen opens in Anchachavidi'], ['2021', 'Cloud kitchen becomes a fine dining restaurant in Anchachavidi'], ['2022', 'New launch at Pullikalodi'], ['2026', 'New launch at Thiruvalli']];
   return (
     <section className="story-section section-paper" id="story">
-      <div className="story-intro" data-reveal><p className="eyebrow" data-typewriter><i /> Why Chillies <i /></p><h2>More Than<br />Just a Meal<span className="red-dot">.</span></h2><p>Good food is always better when shared. At Chillies, we bring people together with authentic Malabar flavours that feel like home.</p><div className="values">{values.map(([icon, title, detail]) => <span key={title}><LineIcon name={icon} /><span>{title}<br />{detail}</span></span>)}</div></div>
+      <div className="story-intro"><p className="eyebrow" data-typewriter><i /> Why Chillies <i /></p><h2>More Than<br />Just a Meal<span className="red-dot">.</span></h2><p>Good food is always better when shared. At Chillies, we bring people together with authentic Malabar flavours that feel like home.</p><div className="values">{values.map(([icon, title, detail]) => <span key={title}><LineIcon name={icon} /><span>{title}<br />{detail}</span></span>)}</div></div>
       <div className="story-photo-wrap" data-reveal><img src={generatedAsset('grilled-chicken.webp')} alt="Charcoal-grilled chicken and Al Faham prepared with fresh herbs and spices at Chillies Restaurant" loading="lazy" decoding="async" /></div>
-      <div className="story-bottom"><div className="story-bottom-photo" data-reveal><img src={generatedAsset('restaurant-interior.webp')} alt="Warmly lit Chillies restaurant family dining room in Wandoor, Kerala" loading="lazy" decoding="async" /></div><div className="story-bottom-copy" data-reveal><p className="eyebrow" data-typewriter>Our Story</p><h2>A Journey<br />of Great Food.</h2><p>From our first restaurant in Wandoor in 2009 to a growing family of branches across Kerala, Chillies has always been about great food and the people who bring it to the table.</p><Button href="https://chilliesgroup.com/about.php" variant="dark">Discover Our Story <Arrow /></Button></div><div className="timeline" data-reveal>{history.map(([year, text]) => <p key={year}><b>{year}</b><span>{text}</span></p>)}</div></div>
+      <div className="story-bottom"><div className="story-bottom-photo" data-reveal><img src={generatedAsset('restaurant-interior.webp')} alt="Warmly lit Chillies restaurant family dining room in Wandoor, Kerala" loading="lazy" decoding="async" /></div><div className="story-bottom-copy"><p className="eyebrow" data-typewriter>Our Story</p><h2>A Journey<br />of Great Food.</h2><p>From our first restaurant in Wandoor in 2009 to a growing family of branches across Kerala, Chillies has always been about great food and the people who bring it to the table.</p><Button href="https://chilliesgroup.com/about.php" variant="dark">Discover Our Story <Arrow /></Button></div><div className="timeline">{history.map(([year, text]) => <p key={year}><b>{year}</b><span>{text}</span></p>)}</div></div>
     </section>
   );
 }
@@ -471,7 +448,7 @@ function LocationsSection() {
   return (
     <section className="locations-section section-paper" id="locations">
       <div className="locations-heading">
-        <div data-reveal>
+        <div>
           <p className="eyebrow" data-typewriter><i /> Our Locations <i /></p>
           <h2>Good Food,<br />Closer to <em>You.</em></h2>
           <p>Visit one of our locations, check the details<br className="desktop-only" /> and get directions or call to order.</p>
@@ -489,10 +466,10 @@ function LocationsSection() {
           </svg>
           <span className="locations-art-note">Serving 4 Hubs <i>✦</i></span>
         </div>
-        <div className="map-note" data-reveal>Authentic flavours<br /><b>across Kerala</b></div>
+        <div className="map-note">Authentic flavours<br /><b>across Kerala</b></div>
       </div>
-      <div className="location-carousel"><button className="carousel-arrow carousel-prev" onClick={() => moveLocations(-1)} aria-label="Previous locations"><Arrow direction="left" /></button><div className="location-grid" ref={trackRef} onScroll={(event) => { const track = event.currentTarget; const center = track.getBoundingClientRect().left + track.clientWidth / 2; const cards = [...track.querySelectorAll('.location-card')]; const nearest = cards.reduce((bestIndex, card, index) => Math.abs(card.getBoundingClientRect().left + card.getBoundingClientRect().width / 2 - center) < Math.abs(cards[bestIndex].getBoundingClientRect().left + cards[bestIndex].getBoundingClientRect().width / 2 - center) ? index : bestIndex, 0); setActiveLocation(nearest); }}>{locations.map((place, i) => (
-        <article className="location-card" data-reveal style={{ '--reveal-order': i }} key={place.name} itemScope itemType="https://schema.org/Restaurant">
+      <div className="location-carousel"><button className="carousel-arrow carousel-prev" onClick={() => moveLocations(-1)} aria-label="Previous locations"><Arrow direction="left" /></button><div className="location-grid" ref={trackRef} onScroll={(event) => { const track = event.currentTarget; const center = track.getBoundingClientRect().left + track.clientWidth / 2; const cards = [...track.querySelectorAll('.location-card')]; const nearest = cards.reduce((bestIndex, card, index) => Math.abs(card.getBoundingClientRect().left + card.getBoundingClientRect().width / 2 - center) < Math.abs(cards[bestIndex].getBoundingClientRect().left + cards[bestIndex].getBoundingClientRect().width / 2 - center) ? index : bestIndex, 0); setActiveLocation(nearest); }}>{locations.map((place) => (
+        <article className="location-card" key={place.name} itemScope itemType="https://schema.org/Restaurant">
           <meta itemProp="name" content={`Chillies Restaurant - ${place.name}`} />
           <meta itemProp="servesCuisine" content="Kerala, Malabar Biryani, Charcoal Grill" />
           <meta itemProp="priceRange" content="₹₹" />
@@ -564,14 +541,14 @@ function ReviewsSection() {
   };
   return (
     <section className={`reviews-section${hasOverflow ? ' has-review-overflow' : ''}`}>
-      <div className="review-intro" data-reveal>
+      <div className="review-intro">
         <p className="eyebrow" data-typewriter>What our customers say</p>
         <h2>Flavours That<br />Create <em>Memories.</em></h2>
         <p>From first visits to lifelong favourites,<br /> our guests share what makes Chillies special.</p>
       </div>
       <div className="review-track" id="review-track" ref={trackRef}>
         {reviews.map(review => (
-          <article className="review-card" key={review.name} data-reveal>
+          <article className="review-card" key={review.name}>
             <div className="stars" aria-label="5 stars rating">
               <span className="star-char">★</span>
               <span className="star-char">★</span>
@@ -605,7 +582,7 @@ function Footer() {
     event.currentTarget.reset();
   };
 
-  return <footer id="contact"><section className="footer-cta"><div data-reveal><h2>Hungry?<br />Let’s Get You<br />Something <em>Great.</em></h2><p>Call us or order through WhatsApp for a quick<br className="desktop-only" /> and delicious experience. Great food is always<br className="desktop-only" /> just a few clicks away.</p><div className="footer-actions"><Button href={orderUrl} target="_blank" rel="noreferrer"><BagIcon /> Order Now <Arrow /></Button><Button href={orderUrl} variant="outline" target="_blank" rel="noreferrer"><WhatsAppIcon /> Chat on WhatsApp <Arrow /></Button></div></div><img src={generatedAsset('hero-biryani.webp')} alt="Freshly prepared Malabar Dum Biriyani spread with raita and pickle at Chillies Restaurant Kerala" loading="lazy" decoding="async" data-reveal /></section>
+  return <footer id="contact"><section className="footer-cta"><div><h2>Hungry?<br />Let’s Get You<br />Something <em>Great.</em></h2><p>Call us or order through WhatsApp for a quick<br className="desktop-only" /> and delicious experience. Great food is always<br className="desktop-only" /> just a few clicks away.</p><div className="footer-actions"><Button href={orderUrl} target="_blank" rel="noreferrer"><BagIcon /> Order Now <Arrow /></Button><Button href={orderUrl} variant="outline" target="_blank" rel="noreferrer"><WhatsAppIcon /> Chat on WhatsApp <Arrow /></Button></div></div><img src={generatedAsset('hero-biryani.webp')} alt="Freshly prepared Malabar Dum Biriyani spread with raita and pickle at Chillies Restaurant Kerala" loading="lazy" decoding="async" /></section>
     <div className="footer-main"><div className="footer-brand"><Brand /><p>Authentic flavours. Great food. Good people.</p><div className="socials"><a href="https://instagram.com/" aria-label="Follow Chillies on Instagram" target="_blank" rel="noreferrer"><InstagramIcon /></a><a href="https://facebook.com/chillies_restaurant_" aria-label="Chillies on Facebook" target="_blank" rel="noreferrer">f</a><a href={orderUrl} aria-label="Chillies on WhatsApp" target="_blank" rel="noreferrer"><WhatsAppIcon /></a><a href="https://maps.google.com/?q=Chillies+Restaurant+Wandoor" aria-label="Chillies on Maps" target="_blank" rel="noreferrer"><LineIcon name="pin" /></a></div></div><div className="footer-links"><h3>Quick Links</h3><a href="#top">Home</a><a href="#menu">Our Menu</a><a href="#story">Our Story</a><a href="#locations">Locations</a><a href="#contact">Contact</a></div><div className="footer-locations" itemScope itemType="https://schema.org/Organization"><meta itemProp="name" content="Chillies Restaurant Group" /><h3>Our Locations in Kerala</h3><p itemProp="address" itemScope itemType="https://schema.org/PostalAddress">📍 &nbsp;<strong itemProp="addressLocality">Wandoor</strong> <small itemProp="streetAddress">Nilambur Road, opposite bus stand, Kerala 679328</small></p><p itemProp="address" itemScope itemType="https://schema.org/PostalAddress">📍 &nbsp;<strong itemProp="addressLocality">Anchachavidi</strong> <small itemProp="streetAddress">Near high school, Kerala 676525</small></p><p itemProp="address" itemScope itemType="https://schema.org/PostalAddress">📍 &nbsp;<strong itemProp="addressLocality">Pullikalodi</strong> <small itemProp="streetAddress">Main Road, Khadeeja Building, Kerala 676525</small></p><p itemProp="address" itemScope itemType="https://schema.org/PostalAddress">📍 &nbsp;<strong itemProp="addressLocality">Thiruvalli</strong> <small itemProp="streetAddress">Near Thiruvalli Panchayat, Kerala 679323</small></p></div><div className="footer-news"><h3>Stay Updated</h3><p>Get the latest updates, special offers<br /> and new dishes straight to your inbox.</p><form onSubmit={requestUpdates}><label className="sr-only" htmlFor="newsletter-email">Email address</label><input id="newsletter-email" name="email" type="email" placeholder="Enter your email address" autoComplete="email" required /><button type="submit" aria-label="Request email updates"><Arrow /></button></form><small role="status">{signupStatus}</small></div></div><div className="footer-bottom"><span>© 2026 Chillies Restaurant. All rights reserved.</span><span>Made with <b>♥</b> for food lovers</span></div>
   </footer>;
 }
@@ -613,7 +590,7 @@ function Footer() {
 function useScrollMotion(heroReady = false) {
   const lenisRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let lenis = null;
 
@@ -657,25 +634,33 @@ function useScrollMotion(heroReady = false) {
       gsap.ticker.lagSmoothing(500, 33);
     }
 
-    // ScrollTrigger context runs on ALL devices, whether Lenis is active or native scroll is used!
+    // ScrollTrigger context runs synchronously before first paint so no element flashes visible prior to reveal
     const context = !prefersReducedMotion ? gsap.context(() => {
       gsap.utils.toArray('[data-draw]').forEach((drawing) => {
         const paths = [...drawing.querySelectorAll('path')];
+        if (!paths.length) return;
         gsap.fromTo(paths, {
           strokeDasharray: (_, path) => `${path.getTotalLength()} ${path.getTotalLength()}`,
           strokeDashoffset: (_, path) => path.getTotalLength(),
         }, {
-          strokeDashoffset: 0, duration: 1.05, stagger: 0.12, ease: 'power2.out',
-          scrollTrigger: { trigger: drawing, start: 'top 86%', once: true },
+          strokeDashoffset: 0,
+          duration: 1.05,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: drawing, start: 'top 90%', once: true },
         });
       });
 
       gsap.utils.toArray('[data-reveal]').forEach((item) => {
         const triggerEl = item.closest('.story-bottom, .signature-band, .locations-ribbon') || item;
-        gsap.fromTo(item, { autoAlpha: 0, y: 44 }, {
-          autoAlpha: 1, y: 0, duration: 1.05, delay: Number(item.style.getPropertyValue('--reveal-order') || 0) * 0.1,
+        gsap.fromTo(item, { autoAlpha: 0, y: 36 }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.95,
+          delay: Number(item.style.getPropertyValue('--reveal-order') || 0) * 0.09,
           ease: 'power3.out',
-          scrollTrigger: { trigger: triggerEl, start: 'top 88%', once: true, invalidateOnRefresh: true },
+          clearProps: 'transform',
+          scrollTrigger: { trigger: triggerEl, start: 'top 90%', once: true },
         });
       });
 
@@ -704,9 +689,8 @@ function useScrollMotion(heroReady = false) {
         gsap.fromTo(target.querySelectorAll('.typing-char'), { autoAlpha: 0 }, {
           autoAlpha: 1,
           duration: 0.02,
-          stagger: 0.032,
+          stagger: 0.028,
           ease: 'none',
-          immediateRender: false,
           scrollTrigger: { trigger: target, start: 'top 94%', once: true },
         });
       });
@@ -752,11 +736,10 @@ function useScrollMotion(heroReady = false) {
           duration: 0.85,
           stagger: 0.04,
           ease: 'power3.out',
-          immediateRender: false,
           scrollTrigger: {
             trigger: heading,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 90%',
+            once: true,
           },
           onComplete: () => {
             gsap.set(heading.querySelectorAll('.line-mask-wrap'), { overflow: 'visible' });
@@ -764,7 +747,7 @@ function useScrollMotion(heroReady = false) {
         });
       });
 
-      gsap.utils.toArray('.menu-heading > div:first-child > p:not(.eyebrow), .story-intro > p:not(.eyebrow), .story-bottom-copy > p:not(.eyebrow), .locations-heading > div:first-child > p:not(.eyebrow), .review-intro > p:not(.eyebrow), .instagram-section > div:first-child > p:not(.eyebrow)').forEach((paragraph, index) => {
+      gsap.utils.toArray('.menu-heading > div:first-child > p:not(.eyebrow), .signature-band > div > p:not(.eyebrow), .story-intro > p:not(.eyebrow), .story-bottom-copy > p:not(.eyebrow), .locations-heading > div:first-child > p:not(.eyebrow), .review-intro > p:not(.eyebrow), .instagram-section > div:first-child > p:not(.eyebrow), .footer-cta > div > p').forEach((paragraph) => {
         gsap.fromTo(paragraph, {
           autoAlpha: 0,
           y: 22,
@@ -772,14 +755,24 @@ function useScrollMotion(heroReady = false) {
           autoAlpha: 1,
           y: 0,
           duration: 0.85,
-          delay: (index % 3) * 0.08,
           ease: 'power3.out',
-          immediateRender: false,
+          clearProps: 'transform',
           scrollTrigger: {
             trigger: paragraph,
-            start: 'top 91%',
-            toggleActions: 'play none none reverse',
+            start: 'top 92%',
+            once: true,
           },
+        });
+      });
+
+      gsap.utils.toArray('.menu-heading .button, .signature-band .button, .story-bottom-copy .button, .footer-actions').forEach((cta) => {
+        gsap.fromTo(cta, { autoAlpha: 0, y: 18 }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'power3.out',
+          clearProps: 'transform',
+          scrollTrigger: { trigger: cta, start: 'top 94%', once: true },
         });
       });
 
@@ -788,167 +781,158 @@ function useScrollMotion(heroReady = false) {
         gsap.fromTo(item, {
           autoAlpha: 0,
           clipPath: `inset(${direction})`,
-          y: 12,
-          scale: 0.96,
         }, {
           autoAlpha: 1,
           clipPath: 'inset(0 0 0 0)',
-          y: 0,
-          scale: 1,
-          duration: 1.4,
-          delay: (index % 4) * 0.22,
+          duration: 1.2,
+          delay: (index % 4) * 0.16,
           ease: 'power2.out',
-          scrollTrigger: { trigger: item, start: 'top 88%', once: true },
+          scrollTrigger: { trigger: item, start: 'top 90%', once: true },
         });
       });
 
-      gsap.utils.toArray('.hero-actions .text-link > span, .hero-actions .button .arrow, .carousel-arrow, .food-card:not([data-loop-copy]) .round-arrow').forEach((arrow, index) => {
-        gsap.fromTo(arrow, { autoAlpha: 0, scale: 0.72, y: 8 }, {
-          autoAlpha: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.8,
-          delay: (index % 5) * 0.12,
-          ease: 'back.out(1.5)',
-          scrollTrigger: { trigger: arrow, start: 'top 90%', once: true },
-        });
+      gsap.fromTo('.menu-art .hand-note', { autoAlpha: 0 }, {
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.menu-art', start: 'top 90%', once: true },
       });
 
-      // Eyebrow labels slide in with a scale and clip animation
-      gsap.utils.toArray('.menu-heading .eyebrow, .story-intro .eyebrow, .story-bottom-copy .eyebrow, .locations-heading .eyebrow, .review-intro .eyebrow, .signature-band .eyebrow, .footer-cta .eyebrow').forEach((eyebrow) => {
-        gsap.fromTo(eyebrow, { autoAlpha: 0, x: -18, clipPath: 'inset(0 100% 0 0)' }, {
-          autoAlpha: 1,
-          x: 0,
-          clipPath: 'inset(0 0% 0 0)',
-          duration: 0.85,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: eyebrow, start: 'top 92%', once: true },
-        });
-      });
-
-      // Value icons in the story section pop in with scale
-      gsap.utils.toArray('.values > span').forEach((item, index) => {
-        gsap.fromTo(item, { autoAlpha: 0, y: 20, scale: 0.9 }, {
+      // Value icons in the story section pop in cleanly together without overlap or flicker
+      const valueItems = gsap.utils.toArray('.values > span');
+      if (valueItems.length) {
+        gsap.fromTo(valueItems, { autoAlpha: 0, y: 18, scale: 0.94 }, {
           autoAlpha: 1,
           y: 0,
           scale: 1,
-          duration: 0.7,
-          delay: index * 0.1,
+          duration: 0.65,
+          stagger: 0.08,
           ease: 'back.out(1.4)',
-          scrollTrigger: { trigger: item, start: 'top 92%', once: true },
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.values', start: 'top 92%', once: true },
         });
-      });
+      }
 
       // Timeline items cascade in from left
-      gsap.utils.toArray('.timeline p').forEach((item, index) => {
-        gsap.fromTo(item, { autoAlpha: 0, x: -24 }, {
+      const timelineItems = gsap.utils.toArray('.timeline p');
+      if (timelineItems.length) {
+        gsap.fromTo(timelineItems, { autoAlpha: 0, x: -24 }, {
           autoAlpha: 1,
           x: 0,
           duration: 0.65,
-          delay: index * 0.08,
+          stagger: 0.08,
           ease: 'power3.out',
-          scrollTrigger: { trigger: item, start: 'top 93%', once: true },
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.timeline', start: 'top 91%', once: true },
         });
+      }
+
+      // Location constellation & handwritten map note
+      gsap.fromTo('.locations-art', { autoAlpha: 0, y: 20 }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: { trigger: '.locations-heading', start: 'top 90%', once: true },
+      });
+      gsap.fromTo('.map-note', { autoAlpha: 0 }, {
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.map-note', start: 'top 90%', once: true },
       });
 
-      // Location cards stagger in with a subtle rotation
-      gsap.utils.toArray('.location-card').forEach((card, index) => {
-        gsap.fromTo(card, { autoAlpha: 0, y: 40, rotateY: 4 }, {
-          autoAlpha: 1,
-          y: 0,
-          rotateY: 0,
-          duration: 0.85,
-          delay: index * 0.1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: card, start: 'top 92%', once: true },
-        });
-      });
-
-      // Locations art botanical images float in
-      gsap.utils.toArray('.locations-art > img').forEach((img, index) => {
-        gsap.fromTo(img, { autoAlpha: 0, scale: 0.7, rotate: index === 0 ? -15 : 15 }, {
-          autoAlpha: 1,
-          scale: 1,
-          rotate: index === 0 ? -9 : 12,
-          duration: 1,
-          delay: index * 0.15,
-          ease: 'back.out(1.3)',
-          scrollTrigger: { trigger: img, start: 'top 90%', once: true },
-        });
-      });
-
-      // Review cards reveal with a lift
-      gsap.utils.toArray('.review-card').forEach((card, index) => {
-        gsap.fromTo(card, { autoAlpha: 0, y: 36, scale: 0.96 }, {
+      // Location cards stagger in cleanly without competing triggers
+      const locationCards = gsap.utils.toArray('.location-card');
+      if (locationCards.length) {
+        gsap.fromTo(locationCards, { autoAlpha: 0, y: 34, scale: 0.98 }, {
           autoAlpha: 1,
           y: 0,
           scale: 1,
           duration: 0.8,
-          delay: index * 0.12,
+          stagger: 0.09,
           ease: 'power3.out',
-          scrollTrigger: { trigger: card, start: 'top 92%', once: true },
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.location-grid', start: 'top 91%', once: true },
         });
-      });
+      }
 
-      // Signature band elements animate in sequence
-      gsap.fromTo('.signature-band > img', { autoAlpha: 0, x: -40, scale: 0.97 }, {
+      // Review cards reveal smoothly together
+      const reviewCards = gsap.utils.toArray('.review-card');
+      if (reviewCards.length) {
+        gsap.fromTo(reviewCards, { autoAlpha: 0, y: 30, scale: 0.97 }, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out',
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.review-track', start: 'top 91%', once: true },
+        });
+      }
+
+      // Signature band elements animate cleanly without fighting scrub transforms
+      gsap.fromTo('.signature-band > img', { autoAlpha: 0, x: -36 }, {
         autoAlpha: 1,
         x: 0,
-        scale: 1,
-        duration: 1,
+        duration: 0.95,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '.signature-band', start: 'top 85%', once: true },
+        clearProps: 'x',
+        scrollTrigger: { trigger: '.signature-band', start: 'top 88%', once: true },
       });
-      gsap.fromTo('.signature-art-group .signature-art-image', { autoAlpha: 0, y: 28, scale: 0.85 }, {
+      gsap.fromTo('.signature-art-group .signature-art-image', { autoAlpha: 0, scale: 0.88 }, {
         autoAlpha: 1,
-        y: 0,
         scale: 1,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: 'back.out(1.4)',
+        duration: 0.85,
+        stagger: 0.14,
+        ease: 'back.out(1.3)',
+        clearProps: 'scale',
         scrollTrigger: { trigger: '.signature-art', start: 'top 90%', once: true },
       });
-      gsap.fromTo('.signature-art > span', { autoAlpha: 0, y: 14 }, {
+      gsap.fromTo('.signature-art > span', { autoAlpha: 0 }, {
         autoAlpha: 1,
-        y: 0,
         duration: 0.75,
         ease: 'power3.out',
-        scrollTrigger: { trigger: '.signature-art', start: 'top 88%', once: true },
+        scrollTrigger: { trigger: '.signature-art', start: 'top 90%', once: true },
       });
 
-      // Footer CTA content slides in
-      gsap.from('.footer-cta > div > *', {
-        autoAlpha: 0,
-        y: 30,
-        duration: 0.85,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.footer-cta', start: 'top 82%', once: true },
+      // Footer CTA image fades in smoothly while scroll parallax owns vertical movement
+      gsap.fromTo('.footer-cta > img', { autoAlpha: 0 }, {
+        autoAlpha: 1,
+        duration: 0.95,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: '.footer-cta', start: 'top 92%', once: true },
       });
 
-      // Footer main columns cascade in
-      gsap.utils.toArray('.footer-main > *').forEach((col, index) => {
-        gsap.fromTo(col, { autoAlpha: 0, y: 26 }, {
+      // Footer main columns cascade in reliably even on shorter laptop screens
+      const footerCols = gsap.utils.toArray('.footer-main > *');
+      if (footerCols.length) {
+        gsap.fromTo(footerCols, { autoAlpha: 0, y: 22 }, {
           autoAlpha: 1,
           y: 0,
           duration: 0.7,
-          delay: index * 0.1,
+          stagger: 0.08,
           ease: 'power3.out',
-          scrollTrigger: { trigger: col, start: 'top 94%', once: true },
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.footer-main', start: 'top 96%', once: true },
         });
-      });
+      }
 
-      // Locations ribbon items slide in from below
-      gsap.utils.toArray('.locations-ribbon > *').forEach((item, index) => {
-        gsap.fromTo(item, { autoAlpha: 0, y: 20 }, {
+      // Locations ribbon items slide in cleanly
+      const ribbonItems = gsap.utils.toArray('.locations-ribbon > *');
+      if (ribbonItems.length) {
+        gsap.fromTo(ribbonItems, { autoAlpha: 0, y: 20 }, {
           autoAlpha: 1,
           y: 0,
           duration: 0.65,
-          delay: index * 0.08,
+          stagger: 0.08,
           ease: 'power3.out',
-          scrollTrigger: { trigger: '.locations-ribbon', start: 'top 90%', once: true },
+          clearProps: 'transform',
+          scrollTrigger: { trigger: '.locations-ribbon', start: 'top 92%', once: true },
         });
-      });
+      }
 
       // 1. Global top scroll progress bar scrub
       const progressBar = document.querySelector('.scroll-progress-bar');
@@ -974,7 +958,7 @@ function useScrollMotion(heroReady = false) {
         });
       }
 
-      // 3. Hero multi-layer depth scrub (biryani bucket, brush splash, floating notes, stamp)
+      // 3. Hero multi-layer depth scrub (biryani bucket, brush splash, floating notes)
       gsap.timeline({
         scrollTrigger: {
           trigger: '.hero',
@@ -988,8 +972,6 @@ function useScrollMotion(heroReady = false) {
         .to('.hero-brush-rim', { rotate: -45, ease: 'none' }, 0)
         .to('.hero-note-malay', { y: -38, x: 14, rotate: -4, ease: 'none' }, 0)
         .to('.hero-note-taste', { y: -48, x: -16, rotate: 4.5, ease: 'none' }, 0)
-        .to('.hero-stamp', { rotate: 50, y: -28, ease: 'none' }, 0)
-        .to('.hero-botanical-branch', { y: -32, rotate: -18, ease: 'none' }, 0)
         .to('.hero-spice-doodle-wrap', { y: 32, ease: 'none' }, 0)
         .to('.hero-copy', { yPercent: -10, autoAlpha: 0.25, ease: 'none' }, 0);
 
@@ -1082,7 +1064,15 @@ function useScrollMotion(heroReady = false) {
       });
     }) : null;
 
+    let cancelled = false;
+    if (!prefersReducedMotion && document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (!cancelled) ScrollTrigger.refresh();
+      });
+    }
+
     return () => {
+      cancelled = true;
       context?.revert();
       document.removeEventListener('click', onSectionLink);
       if (tick) gsap.ticker.remove(tick);
@@ -1092,15 +1082,30 @@ function useScrollMotion(heroReady = false) {
     };
   }, []);
 
-  useEffect(() => {
-    if (!heroReady) return;
+  useLayoutEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) return undefined;
+
+    if (!heroReady) {
+      const ctx = gsap.context(() => {
+        gsap.set(['.hero .eyebrow', '.hero-description', '.hero-actions', '.hero-line > span', '.hero-food', '.hero-brush', '.hero-bottom-note'], {
+          autoAlpha: 0,
+        });
+      });
+      return () => ctx.revert();
+    }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-      tl.from(['.hero .eyebrow', '.hero-description', '.hero-actions'], {
-        autoAlpha: 0, y: 34, duration: 1.15, stagger: 0.16,
+      tl.fromTo(['.hero .eyebrow', '.hero-description', '.hero-actions'], {
+        autoAlpha: 0,
+        y: 34,
+      }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1.15,
+        stagger: 0.16,
+        clearProps: 'y',
       }, 0.05)
         .fromTo('.hero-line > span', {
           yPercent: 120,
@@ -1118,17 +1123,35 @@ function useScrollMotion(heroReady = false) {
             gsap.set('.hero-line > span', { clearProps: 'filter' });
           },
         }, 0.12)
-        .from('.hero-food', {
-          scale: 0.86, autoAlpha: 0, y: 38, duration: 1.25, ease: 'back.out(1.4)',
+        .fromTo('.hero-food', {
+          autoAlpha: 0,
+          y: 36,
+        }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'back.out(1.4)',
+          clearProps: 'y',
         }, 0.22)
-        .from('.hero-brush', {
-          scale: 0.8, autoAlpha: 0, rotation: -8, duration: 1.3, ease: 'power3.out',
+        .fromTo('.hero-brush', {
+          autoAlpha: 0,
+          y: 16,
+        }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+          clearProps: 'y',
         }, 0.1)
-        .from('.hero-side-list li', {
-          autoAlpha: 0, x: -22, duration: 0.7, stagger: 0.08, ease: 'power3.out',
-        }, 0.38)
-        .from('.hero-bottom-note', {
-          autoAlpha: 0, y: 10, duration: 0.8, ease: 'power3.out',
+        .fromTo('.hero-bottom-note', {
+          autoAlpha: 0,
+          y: 10,
+        }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          clearProps: 'y',
         }, 0.5);
     });
     return () => ctx.revert();
@@ -1162,7 +1185,7 @@ export function LineMaskSplit({
   const containerRef = useRef(null);
   const textRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = textRef.current;
     const container = containerRef.current;
     if (!el || !container) return;
@@ -1204,10 +1227,9 @@ export function LineMaskSplit({
       stagger: 0.04,
       delay: baseDelay,
       ease: transition.ease || 'power3.out',
-      immediateRender: false,
       scrollTrigger: {
         trigger: container,
-        start: 'top 88%',
+        start: 'top 90%',
         toggleActions: reverse ? 'play none none reverse' : 'play none none none',
       },
     });
@@ -1774,7 +1796,7 @@ export default function App() {
       if (!(image instanceof HTMLImageElement)) return;
       if (image.complete) {
         const isReady = image.naturalWidth > 0;
-        image.dataset.mediaState = isReady ? 'ready' : 'error';
+        image.dataset.mediaState = isReady ? 'done' : 'error';
         image.closest('.food-card, .location-card, .story-photo-wrap, .story-bottom-photo, .signature-band, .footer-cta')?.classList.toggle('has-loaded-image', isReady);
       } else {
         image.dataset.mediaState = 'loading';
@@ -1785,7 +1807,8 @@ export default function App() {
     const onImageEvent = (event) => {
       if (!(event.target instanceof HTMLImageElement)) return;
       const isReady = event.type === 'load' && event.target.naturalWidth > 0;
-      event.target.dataset.mediaState = isReady ? 'ready' : 'error';
+      const wasLoading = event.target.dataset.mediaState === 'loading';
+      event.target.dataset.mediaState = isReady ? (wasLoading ? 'ready' : 'done') : 'error';
       const parent = event.target.closest('.food-card, .location-card, .story-photo-wrap, .story-bottom-photo, .signature-band, .footer-cta');
       if (parent) {
         parent.classList.toggle('has-loaded-image', isReady);
