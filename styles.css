@@ -904,19 +904,10 @@ footer{background:var(--paper)}.footer-cta{position:relative;display:flex;align-
   padding:14px 0 20px;
   overflow:hidden;
 }
-.menu-stage .menu-carousel:before{
-  display:none;
-}
+.menu-stage .menu-carousel:before,
 .menu-stage .menu-carousel:after{
-  content:'';
-  position:absolute;
-  top:0;
-  bottom:0;
-  right:0;
-  width:clamp(36px, 4.2vw, 64px);
-  z-index:4;
-  pointer-events:none;
-  background:linear-gradient(to left, rgba(250,245,232,0.92) 0%, rgba(250,245,232,0) 100%);
+  display:none;
+  content:none;
 }
 .menu-stage .food-grid{
   display:flex;
@@ -2958,5 +2949,81 @@ body {
 @media(max-width: 760px) {
   .review-track {
     padding: 8px 4px 16px;
+  }
+}
+
+/* ==========================================================================
+   12. Menu Edge & Footer CTA Opacity Feathering
+   ========================================================================== */
+
+@media(min-width: 761px) {
+  .menu-stage .menu-carousel {
+    overflow: visible;
+  }
+  .menu-stage .menu-carousel > .carousel-arrow {
+    display: none;
+  }
+  .menu-stage .food-viewport {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 0 26px;
+    margin: -16px 0 -26px;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 18px,
+      rgba(0, 0, 0, 0.72) 44px,
+      #000 clamp(68px, 6.2vw, 108px),
+      #000 calc(100% - clamp(68px, 6.2vw, 108px)),
+      rgba(0, 0, 0, 0.72) calc(100% - 44px),
+      rgba(0, 0, 0, 0.25) calc(100% - 18px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 18px,
+      rgba(0, 0, 0, 0.72) 44px,
+      #000 clamp(68px, 6.2vw, 108px),
+      #000 calc(100% - clamp(68px, 6.2vw, 108px)),
+      rgba(0, 0, 0, 0.72) calc(100% - 44px),
+      rgba(0, 0, 0, 0.25) calc(100% - 18px),
+      transparent 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .footer-cta > img {
+    top: -6%;
+    right: -1%;
+    width: 72%;
+    height: 114%;
+    background-color: transparent;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.32) 10%, rgba(0, 0, 0, 0.78) 22%, #000 35%),
+      linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.42) 8%, rgba(0, 0, 0, 0.85) 15%, #000 24%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.32) 10%, rgba(0, 0, 0, 0.78) 22%, #000 35%),
+      linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.42) 8%, rgba(0, 0, 0, 0.85) 15%, #000 24%);
+    mask-composite: intersect;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+  .footer-cta::after {
+    background:
+      linear-gradient(90deg, #11100e 0%, #11100ef2 28%, rgba(17, 16, 14, 0.56) 46%, rgba(17, 16, 14, 0) 68%),
+      linear-gradient(180deg, #11100e 0%, rgba(17, 16, 14, 0.52) 10%, rgba(17, 16, 14, 0) 24%);
+    pointer-events: none;
+  }
+}
+
+@media(max-width: 760px) {
+  .menu-stage .food-viewport {
+    overflow: visible;
+  }
+  .footer-cta > img {
+    background-color: transparent;
   }
 }
